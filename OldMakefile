@@ -1,0 +1,16 @@
+vpath %.h config
+vpath %.c config
+
+objects = main.o config/config.o
+#objects = main.o config.o
+spvclient : $(objects)
+	gcc -o spvclient $(objects) -I config
+
+main.o : main.c config.h
+	gcc -c main.c -I config
+
+config.o : config.c config.h
+	gcc -c config.c -I config 
+.PHONY : clean
+clean:
+	-rm spvclient $(objects)
